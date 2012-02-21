@@ -1,0 +1,75 @@
+@-webkit-keyframes rbow {
+    0% { top: 20px; background-color: red; }
+    10% { top: 62px; }
+    20% { top: 118px; }
+    30% { top: 162px; }
+    40% { top: 190px; }
+    50% { top: 200px; background-color: blue; }
+    60% { top: 190px; }
+    70% { top: 162px; }
+    80% { top: 118px; }
+    90% { top: 62px; }
+    100% { top: 20px; background-color: red;  }
+}
+
+@-webkit-keyframes rbow2 {
+    80% { top: 20px; }
+    90% { top: 62px; }
+    100% { top: 118px;  background-color: purple; }
+    0% { top: 162px;  background-color: purple; }
+    10% { top: 190px; }
+    20% { top: 200px;}
+    30% { top: 190px; }
+    40% { top: 162px; }
+    50% { top: 118px; background-color: pink; }
+    60% { top: 62px;  }
+    70% { top: 20px; }
+}
+
+@-webkit-keyframes rbow3 {
+    90% { top: 20px;  }
+    100% { top: 62px; background-color: blue; }
+    0% { top: 118px; background-color: blue; }
+    10% { top: 162px; }
+    20% { top: 190px; }
+    30% { top: 200px; }
+    40% { top: 190px; }
+    50% { top: 162px; background-color: red; }
+    60% { top: 118px; }
+    70% { top: 62px; }
+    80% { top: 20px; }
+}
+
+.rbow {
+    position: absolute;
+    width: 100%;
+    top: 20px;
+    height: 100px;
+    opacity: 0.8;
+    z-index: 10;
+    display:none;
+}
+#rbow {
+    -webkit-animation: rbow 1s linear 0s infinite;
+}
+#rbow2 {
+    -webkit-animation: rbow2 1s linear 0s infinite;
+}
+#rbow3 {
+    -webkit-animation: rbow3 1s linear 0s infinite;
+}
+
+#moarbutton {
+    height: 20px;
+    width: 70px;
+    text-shadow: white -1px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: black;
+    background-image: url(sp://import/img/info_group-button.png);
+    position: absolute;
+    border: 0;
+    top: 0;
+    right: 0;
+    display: block;
+}

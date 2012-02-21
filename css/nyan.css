@@ -1,0 +1,56 @@
+html > body {
+    background-color: transparent;
+}
+
+div#nyanCat {
+    left: -155px;
+    -webkit-transition: left 0.5s ease-out;
+}
+
+div#mainContainer {
+    width: 100%;
+    bottom: 0;
+    border: 0;
+    z-index: 10;
+}
+
+#albumview {
+    margin: 12px auto 0;
+    width: 300px;
+    position: relative;
+    z-index: 100;
+}
+#albumview > img {
+    border: 2px solid #373737;
+    outline: 1px solid white;
+}
+
+.playbtn {
+    display: block;
+    width: 66px;
+    height: 66px;
+    position: absolute;
+    left: 50%;
+    top: 162px;
+    margin-top: -33px;
+    background-image: url(sp://import/img/play-button-L.png);
+}
+
+#nextbutton {
+    margin-left: 200px;
+}
+#prevbutton {
+    margin-left: -266px;
+    -webkit-transform: scaleX(-1);
+}
+.playbtn:hover {
+    background-position-x: -68px;
+}
+#footer {
+    font-size: small;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #999;
+    z-index: 1;
+}

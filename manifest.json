@@ -1,0 +1,24 @@
+{
+    "BundleType": "Application",
+    "AppIcon": {
+        "36x18": "nyan.png"
+    },
+    "AppName": {
+        "en": "nyan"
+    },
+    "SupportedLanguages": [
+        "en"
+    ],
+    "RequiredPermissions": [
+         "http://*.echonest.com/"
+    ],
+    "DefaultTabs": [
+      {
+        "arguments": "less",
+        "title": {"en": "LESS"}
+      },
+      {
+        "arguments": "moar",
+        "title": {"en": "MOAR"}
+      }]
+}
