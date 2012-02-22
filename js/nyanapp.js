@@ -22,24 +22,23 @@ var update_cover = function(player) {
 
 var playstate_change = function(player) {
   return function(event) {
+    console.log(interval, event);
     if (event.type !== "playerStateChanged") {
       return;
     }
     update_cover(player);
     main.trigger('playerstate', {player: player});
-    if (!event.data.playstate) {
+    if (!player.playing) {
       if (interval) {
         clearInterval(interval);
         interval = null;
       }
       return;
-    } else {
-      if (!player.track) {
-        player.play(storage.shift());
-      }
     }
+    console.log('ahem');
     if (!interval) {
       interval = setInterval(function() {
+        console.log('trigger lol');
         main.trigger('playerstate', {player: player});
       }, 1000);
     }
