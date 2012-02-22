@@ -20,11 +20,20 @@ var update_cover = function(player) {
     }
 };
 
+var volume_scale = function(player) {
+  var factor = 1 + player.volume;
+  $('#nyanCat').css('-webkit-transform', 'scale('
+                    + factor + ', ' + factor + ')');
+
+};
+
 var playstate_change = function(player) {
   return function(event) {
-    console.log(interval, event);
     if (event.type !== "playerStateChanged") {
       return;
+    }
+    if (event.data.volume) {
+      volume_scale(player);
     }
     update_cover(player);
     main.trigger('playerstate', {player: player});
@@ -70,6 +79,8 @@ $(document).ready(function() {
         player.play(track);
       });
   }
+
+  volume_scale(player);
 
   // Trigger the player here, to get the cat to correct place at app start
   main.trigger('playerstate', {player:player});
