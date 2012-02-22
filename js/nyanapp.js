@@ -44,10 +44,8 @@ var playstate_change = function(player) {
       }
       return;
     }
-    console.log('ahem');
     if (!interval) {
       interval = setInterval(function() {
-        console.log('trigger lol');
         main.trigger('playerstate', {player: player});
       }, 1000);
     }
@@ -99,7 +97,6 @@ $(document).ready(function() {
           prev = e.clientX;
 
       cat_bound = true;
-      console.log('dragstart');
 
       self.removeClass('animatenyan');
       var movefun = function(e) {
