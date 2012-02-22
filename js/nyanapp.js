@@ -2,7 +2,6 @@ var _client_width = 0,
     sp = getSpotifyApi(1),
     models = sp.require('sp://import/scripts/api/models'),
     main = $('#mainContainer'),
-    EN = new Echonest('UEIQAUFH8LWHXFXZL'),
     storage = new Array(),
     interval;
 
@@ -14,31 +13,11 @@ $('#mainContainer').bind('playerstate', function(event) {
   nyan.move_nyan(cat, cat_pos);
 });
 
-var play_next = function(player) {
-  if (storage) {
-    player.play(storage.shitf());
-  } else {
-    populate_playlist(player, function() {
-      play_next();
-    });
-  }
-};
-
 var update_cover = function(player) {
     var cover_art = nyan.get_cover_art(player);
     if (cover_art) {
       $('#albumview').html(cover_art);
     }
-};
-
-var populate_playlist = function(player, callback) {
-  if (storage.length > 1 || !player.track) {
-    return;
-  }
-  EN.get_related(player.track, function(result) {
-    storage = result;
-    if (callback) callback();
-  });
 };
 
 var playstate_change = function(player) {
@@ -59,7 +38,6 @@ var playstate_change = function(player) {
         player.play(storage.shift());
       }
     }
-    populate_playlist(player);
     if (!interval) {
       interval = setInterval(function() {
         main.trigger('playerstate', {player: player});
@@ -73,6 +51,9 @@ $(window).resize(function() {
 });
 
 $(document).ready(function() {
+  var cat_bound = false,
+      player = models.player;
+
   sp.core.addEventListener("argumentsChanged", function() {
     if(sp.core.getArguments()[0] == 'moar') {
       $('.rbow').show();
@@ -81,34 +62,61 @@ $(document).ready(function() {
     }
   });
   _client_width = main.width();
-  var player = models.player;
 
-  if (player.track) {
-    populate_playlist(player);
-  } else {
+  if (!player.track) {
     // Hardcoded nyan cat yeaaaaaah
     models.Track.fromURI(
       "spotify:track:5CXfVcqBAtCAHhnGmoxBZ9",
       function(track) {
         player.play(track);
-        populate_playlist(player);
       });
   }
+
   // Trigger the player here, to get the cat to correct place at app start
   main.trigger('playerstate', {player:player});
   player.observe(models.EVENT.CHANGE, playstate_change(player));
 
   update_cover(player);
 
-  $('#nextbutton').bind('click', function() {
-    play_next();
-  });
-  $('#prevbutton').bind('click', function() {
-    player.previous();
-  });
+  $('#nyanCat')
+    .attr('draggable', 'true')
+    .bind('dragstart', function(e) {
+      if (!player.track || cat_bound) {
+        return;
+      }
+
+      var self = $(this),
+          _end_triggered = false,
+          prev = e.clientX;
+
+      cat_bound = true;
+      console.log('dragstart');
+
+      self.removeClass('animatenyan');
+      var movefun = function(e) {
+        var diff = Math.abs(e.clientX - prev);
+        if (diff > 10) {
+          nyan.move_nyan(self, e.clientX);
+        }
+      };
+      main.bind('mousemove', movefun);
+      $(document).one('mouseup', function(e) {
+        var cat_relative = nyan.cat_relative_position(self);
+
+        main.unbind('mousemove', movefun);
+        self.addClass('animatenyan');
+        cat_bound = false;
+
+        if(!_end_triggered) {
+          _end_triggered = true;
+          models.player.position = models.player.track.duration * cat_relative;
+        }
+      });
+    });
 });
 
 // Read the nyan cat index.html and replace needed parts :p
 var temp_html = document.createElement('html');
 temp_html.innerHTML = models.readFile('css-nyan-cat/index.html');
 main.html($('#mainContainer', temp_html).html());
+$('#nyanCat').addClass('animatenyan');

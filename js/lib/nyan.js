@@ -2,6 +2,10 @@ var nyan = (function() {
   var NYAN_START_POS = -155;
   var ns = {};
 
+  ns.cat_relative_position = function(cat) {
+    return cat.offset().left / cat.parent().width();
+  };
+
   ns.relative_position = function(player) {
     if (!player.track) {
       return 0;
