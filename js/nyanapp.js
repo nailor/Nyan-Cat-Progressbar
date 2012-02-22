@@ -62,9 +62,9 @@ $(document).ready(function() {
 
   sp.core.addEventListener("argumentsChanged", function() {
     if(sp.core.getArguments()[0] == 'moar') {
-      $('.rbow').show();
+      $('body').addClass('moar');
     } else {
-      $('.rbow').hide();
+      $('body').removeClass('moar');
     }
   });
   _client_width = main.width();

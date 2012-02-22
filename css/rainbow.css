@@ -40,6 +40,28 @@
     80% { top: 20px; }
 }
 
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotateY(0);
+        -webkit-animation-timing-function: ease-in;
+    }
+   25% {
+        -webkit-transform: rotateY(-180deg);
+        -webkit-animation-timing-function: ease-out;
+    }
+    50% {
+        -webkit-transform: rotateY(0);
+        -webkit-animation-timing-function: ease-in;
+    }
+    75% {
+        -webkit-transform: rotateY(180deg);
+        -webkit-animation-timing-function: ease-out
+    }
+    100% {
+        -webkit-transform: rotateY(0);
+    }
+}
+
 .rbow {
     position: absolute;
     width: 100%;
@@ -49,6 +71,10 @@
     z-index: 10;
     display:none;
 }
+.moar .rbow {
+    display: block;
+}
+
 #rbow {
     -webkit-animation: rbow 1s linear 0s infinite;
 }
@@ -72,4 +98,8 @@
     top: 0;
     right: 0;
     display: block;
+}
+
+.moar #albumview {
+    -webkit-animation: rotate 5s linear 0s infinite;
 }
