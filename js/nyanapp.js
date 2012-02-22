@@ -78,8 +78,7 @@ $(document).ready(function() {
   update_cover(player);
 
   $('#nyanCat')
-    .attr('draggable', 'true')
-    .bind('dragstart', function(e) {
+    .bind('mousedown', function(e) {
       if (!player.track || cat_bound) {
         return;
       }
